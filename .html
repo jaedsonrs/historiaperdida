@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Texto Movendo com Rastro</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      let x, y;
+      let speedX, speedY;
+      let move = false;
+
+      function setup() {
+        createCanvas(windowWidth, windowHeight);
+        background(255);
+        x = width / 2;
+        y = height / 2;
+        speedX = random(-5, 5);
+        speedY = random(-5, 5);
+      }
+
+      function draw() {
+        if (move) {
+          x += speedX;
+          y += speedY;
+
+          // Mantém o texto dentro da tela
+          if (x < 0 || x > width) {
+            speedX *= -1;
+          }
+          if (y < 0 || y > height) {
+            speedY *= -1;
+          }
+
+          fill(255);
+          textSize(48);
+          text("história", x, y);
+        }
+      }
+
+      function mousePressed() {
+        move = true;
+        // Deixa um rastro vermelho
+        fill(255, 0, 0);
+        rect(0, 0, width, height);
+      }
+    </script>
+  </body>
+</html>
